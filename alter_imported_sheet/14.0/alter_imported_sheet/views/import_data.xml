@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="assets_backend_html" name="web html assets" inherit_id="web.assets_backend">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/alter_imported_sheet/static/src/js/framework.js"></script>
+        </xpath>
+    </template>
+    <record id="match_form_view" model="ir.ui.view">
+        <field name="name">Import data view</field>
+        <field name="model">import.data</field>
+        <field name="arch" type="xml">
+            <form string="Import Sheet Data">
+                <header>
+                    <button name="load_data" type="object" string="Load Data" class="oe_highlight" attrs="{'invisible': [('create_date', 'in', ['', False, None])]}" />
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" force_save="1" />
+                    </h1>
+                    <group>
+                        <field name="file" filename="name" required="1" />
+                        <field name="save_data" />
+                        <field name="create_date" invisible="1" />
+                        <field name="attachment_ids" widget="many2many_binary" attrs="{'invisible': [('create_date', 'in', ['', False, None])]}" />
+                    </group>
+                    <notebook>
+                        <page string="Data View" attrs="{'invisible': [('create_date', 'in', ['', False, None])]}">
+                            <field name="import_data" class="note_wtd" style="overflow: auto;" widget="html" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="match_tree_view" model="ir.ui.view">
+        <field name="name">Import data view</field>
+        <field name="model">import.data</field>
+        <field name="arch" type="xml">
+            <tree string="Import Sheet Data">
+                <field name="name" />
+                <field name="save_data" />
+            </tree>
+        </field>
+    </record>
+    <act_window name="Alter import data" res_model="import.data" id="match_import_data" />
+    <menuitem id="match_menu" name="Alter import data" action="match_import_data" />
+</odoo>
