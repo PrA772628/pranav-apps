@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="field_trace" model="ir.ui.view">
+        <field name="name">field.inherit.traceability</field>
+        <field name="model">ir.model.fields</field>
+        <field name="inherit_id" ref="mail.field_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="track_visibility"]' position="replace">
+                <field name="trace"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
